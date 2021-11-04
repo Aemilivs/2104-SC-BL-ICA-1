@@ -25,4 +25,4 @@
 
   (defn -main
     [& args]
-    (print (read-data)))
+    (prompt))
