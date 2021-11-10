@@ -1,15 +1,30 @@
 (ns chatbot.core
-  (:gen-class))
+  (:gen-class)
+  (:require [chatbot.chatbot :as chatbot]))
   
-  (defn prompt
+  (
+    defn prompt
     "Introduce CLI"
     []
-    (println "Hello username!")
-    (flush)
-    (let [input (read)]
-      (when (not= input 'exit)
-        (println "How can I help you? Type 'exit' to finish")
-        (recur))))
+    (
+      do
+        (println "Hello, please type exit to finish the application.")
+        (
+          let [input (read)]
+          (
+            when
+              (not= input 'exit)
+              (
+                do
+                  (
+                    println (chatbot/process input)
+                  )
+                  (recur)
+              )
+          )
+        )
+    )
+  )
 
   (defn -main
     [& args]
