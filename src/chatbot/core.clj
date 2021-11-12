@@ -1,9 +1,9 @@
 (ns chatbot.core
-  (:gen-class)
-  (:require [chatbot.chatbot :as chatbot]))
-  
+    (:gen-class)
+    (:require [chatbot.chatbot :as chatbot])
+  )
   (
-    defn prompt
+    defn ^:dynamic prompt
     "Introduce CLI"
     []
     (
