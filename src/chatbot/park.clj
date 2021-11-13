@@ -34,3 +34,14 @@
             property
         )
     )
+
+    (
+        defn get-biking
+        "Get whether biking is possible"
+        [title]
+        (
+            get-park-property 
+                title
+                "biking" 
+        )
+    )
