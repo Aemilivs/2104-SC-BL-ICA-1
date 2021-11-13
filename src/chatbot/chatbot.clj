@@ -1,6 +1,5 @@
 (ns chatbot.chatbot
         (:require [chatbot.park :as park]))
-    )
 
 (
     def responses
@@ -87,7 +86,7 @@
         -> response
             ;; Replaced with placeholder because function can't be reached without leinengen working correctly
             ;; (clojure.string/replace #"\{biking\}" (park/get-biking subject))
-            (clojure.string/replace #"\{biking\}" "true")
+            (clojure.string/replace #"\{biking\}" "possible")
             (clojure.string/replace #"\{park\}" subject)
     )
 )
