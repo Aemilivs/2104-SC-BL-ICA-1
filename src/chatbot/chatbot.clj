@@ -2,14 +2,48 @@
         (:require [chatbot.park :as park]))
 
 (
-    def responses
+    def keywords
     {
-        "bicicle" "Biking is {biking} in {park}",
-        "playground" "There is {playground} in {park}"
+        "bicicle" "bicicle",
+        "bike" "bicicle",
+        "ride" "bicicle",
+        "two-wheels" "bicicle",
+        "playground" "playground"
     }
 )
 
 (
+    def responses
+    {
+        "bicicle"
+        {
+            true 
+            '(
+                "You can ride bicicle in {park}",
+                "There is a bicicle road in {park}",
+                "{park} has the roads, you will be on two wheels"
+            )
+            false
+            '(
+                "Unfortunately, you can't ride bicicle there.",
+                "You can't ride bicicle in {park}"
+            )
+        },
+        "playground"
+        {
+            true
+            '(
+                "There is a playground in {park}", 
+                "Kids can play in a playground in {park}"
+            )
+            false
+            '("Unfortunately, there is no playground in {park}")
+        }
+    }
+)
+
+(
+    ;; TODO Receive the list of parks from park.clj
     def subjects
     #{
         "bertramka",
@@ -45,16 +79,61 @@
 )
 
 (
-    defn match-responses
-    "Find responses that correspond to the keywords present in the input."
+    defn match-keyword
+    "Find the keyword in the input to hook the responses to it"
     [input]
     (
-        filter
-        #(not (nil? %))
+        ;; TODO Handle multiple keywords?
+        first
         (
-            map
-                #(get responses %)
-                (clojure.string/split input #" ")
+            filter
+            #(not (nil? %))
+            (
+                map
+                    #(get keywords %)
+                    (clojure.string/split input #" ")
+            )
+        )
+    )
+)
+
+(
+    defn get-keyword-data
+    "Receive the data regarding the keyword"
+    [keyword park]
+    (
+        case keyword
+            "bicicle"
+            true
+            ;; (
+                ;; park/get-bicycle-data park
+            ;; )
+            "playground"
+            true
+            ;; (
+                ;; park/get-playground-data park
+            ;; )
+    )
+)
+
+(
+    defn build-response
+    "Build the response depending on what is the keyword and what is the park"
+    [keyword park]
+    (
+        rand-nth
+        (
+            get
+            (
+                get
+                    responses
+                    keyword
+            )
+            (
+                get-keyword-data
+                keyword
+                park
+            )
         )
     )
 )
@@ -83,12 +162,10 @@
     "Replace the placeholders with actual values"
     [response subject]
     (
-        ;; Threading
-        -> response
-            ;; Replaced with placeholder because function can't be reached without leinengen working correctly
-            ;; (clojure.string/replace #"\{biking\}" (park/get-biking subject))
-            (clojure.string/replace #"\{biking\}" "possible")
-            (clojure.string/replace #"\{park\}" (clojure.string/capitalize subject))
+        clojure.string/replace 
+            response 
+            #"\{park\}" 
+            (clojure.string/capitalize subject)
     )
 )
 
@@ -99,18 +176,21 @@
     (
         let 
         [
-            responses (match-responses input)
+            keyword (match-keyword input)
             subject (match-subject input)
         ]
         (
             do
             (
+                println keyword subject
+            )
+            (
                 ;; TODO: Introduce a guard clause to handle empty responses list
                 ;; TODO: Introduce a guard clause to handle missing subject
                 replace-placeholders
-                    ;; TODO Select a random response instead of a first one
-                   (first responses)
+                   (build-response keyword subject)
                     subject
+                    
             )
         )
     )
