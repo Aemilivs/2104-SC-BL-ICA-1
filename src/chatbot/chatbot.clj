@@ -1,4 +1,5 @@
 (ns chatbot.chatbot
+        (:require clojure.string)
         (:require [chatbot.park :as park]))
 
 (
@@ -12,9 +13,32 @@
     }
 )
 
+;; TODO move responses and keywords to a separated file.
 (
     def responses
     {
+        "wc"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
+        }
+        "attractions"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
+        }
         "bicicle"
         {
             true 
@@ -29,6 +53,28 @@
                 "You can't ride bicicle in {park}"
             )
         },
+        "skating"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
+        }
+        "sports"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
+        }
         "playground"
         {
             true
@@ -37,13 +83,39 @@
                 "Kids can play in a playground in {park}"
             )
             false
-            '("Unfortunately, there is no playground in {park}")
+            '(
+                "Unfortunately, there is no playground in {park}"
+            )
+        }
+        "dogs"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
+        }
+        "parking"
+        {
+            true
+            '(
+                ""
+            )
+            false
+            '(
+                ""
+            )
         }
     }
 )
 
 (
     ;; TODO Receive the list of parks from park.clj
+    ;; TODO Approximate the match between input and the keyword
+    ;; e.g. bertrmk => bertramka; klinskeho zahrada => kinskeho-zahrada
     def subjects
     #{
         "bertramka",
@@ -65,15 +137,15 @@
     defn prepare-text
     "Prepare text for processing by removing all the punctuation signs and making it lower case."
     [input]
-    (clojure.string/lower-case 
+    (
+        clojure.string/lower-case 
         (
-            apply
-                str
-                (
-                    filter
-                        #(or (Character/isLetter %) (Character/isWhitespace %))
-                        input
-                )
+            clojure.string/join
+            (
+                filter
+                    #(or (Character/isLetter %) (Character/isWhitespace %) (= \- %))
+                    input
+            )
         )
     )
 )
@@ -100,26 +172,48 @@
 (
     defn get-keyword-data
     "Receive the data regarding the keyword"
-    [keyword park]
+    [keyword subject]
     (
         case keyword
+            "wc"
+            (
+                chatbot.park/get-wc subject
+            )
+            "attractions"
+            (
+                chatbot.park/get-attractions subject
+            )
             "bicicle"
-            true
-            ;; (
-                ;; park/get-bicycle-data park
-            ;; )
+            (
+                chatbot.park/get-biking subject
+            )
+            "skating"
+            (
+                chatbot.park/get-skating subject
+            )
+            "sports"
+            (
+                chatbot.park/get-sports subject
+            )
             "playground"
-            true
-            ;; (
-                ;; park/get-playground-data park
-            ;; )
+            (
+                chatbot.park/get-playground subject
+            )
+            "dogs"
+            (
+                chatbot.park/get-dogs subject
+            )
+            "parking"
+            (
+                chatbot.park/get-parking subject
+            )
     )
 )
 
 (
     defn build-response
     "Build the response depending on what is the keyword and what is the park"
-    [keyword park]
+    [keyword subject]
     (
         rand-nth
         (
@@ -132,7 +226,7 @@
             (
                 get-keyword-data
                 keyword
-                park
+                subject
             )
         )
     )
@@ -180,18 +274,12 @@
             subject (match-subject input)
         ]
         (
-            do
-            (
-                println keyword subject
-            )
-            (
-                ;; TODO: Introduce a guard clause to handle empty responses list
-                ;; TODO: Introduce a guard clause to handle missing subject
-                replace-placeholders
-                   (build-response keyword subject)
-                    subject
-                    
-            )
+            ;; TODO: Introduce a guard clause to handle exit sequence (e.g. Goodbye!)
+            ;; TODO: Introduce a guard clause to handle empty responses list
+            ;; TODO: Introduce a guard clause to handle missing subject
+            replace-placeholders
+               (build-response keyword subject)
+                subject
         )
     )
 )
