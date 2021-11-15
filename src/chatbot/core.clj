@@ -10,7 +10,7 @@
       do
         (println "Hello, please type exit to finish the application.")
         (
-          let [input (read)]
+          let [input (read-line)]
           (
             when
               (not= input 'exit)
