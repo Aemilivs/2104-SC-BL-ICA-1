@@ -134,6 +134,15 @@
 )
 
 (
+        defn get-park-titles-list
+        "Get park titles list"
+        []
+        (
+            list (keys (park/read-data))
+        )
+)
+
+(
     defn prepare-text
     "Prepare text for processing by removing all the punctuation signs and making it lower case."
     [input]
