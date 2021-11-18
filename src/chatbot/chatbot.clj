@@ -9,6 +9,15 @@
 ;; e.g. bertrmk => bertramka; klinskeho zahrada => kinskeho-zahrada
 
 (
+        defn get-park-titles-set
+        "Get park titles set"
+        []
+        (
+            set (keys (park/read-data))
+        )
+)
+
+(
     defn prepare-text
     "Prepare text for processing by removing all the punctuation signs and making it lower case."
     [input]
@@ -118,7 +127,9 @@
             filter
                 #(
                     contains?
-                        data/subjects
+                        (
+                         get-park-titles-set
+                         )
                         %
                 )
                 (clojure.string/split input #" ")
