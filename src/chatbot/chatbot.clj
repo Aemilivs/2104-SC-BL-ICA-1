@@ -134,11 +134,11 @@
 )
 
 (
-        defn get-park-titles-list
-        "Get park titles list"
+        defn get-park-titles-set
+        "Get park titles set"
         []
         (
-            list (keys (park/read-data))
+            set (keys (park/read-data))
         )
 )
 
