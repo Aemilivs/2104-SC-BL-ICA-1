@@ -1,137 +1,12 @@
 (ns chatbot.chatbot
         (:require clojure.string)
-        (:require [chatbot.park :as park]))
-
-(
-    def keywords
-    {
-        "bicicle" "bicicle",
-        "bike" "bicicle",
-        "ride" "bicicle",
-        "two-wheels" "bicicle",
-        "playground" "playground"
-    }
-)
+        (:require [chatbot.park :as park])
+  (:require [chatbot.responses-and-keywords :as data]))
 
 ;; TODO move responses and keywords to a separated file.
-(
-    def responses
-    {
-        "wc"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-        "attractions"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-        "bicicle"
-        {
-            true 
-            '(
-                "You can ride bicicle in {park}",
-                "There is a bicicle road in {park}",
-                "{park} has the roads, you will be on two wheels"
-            )
-            false
-            '(
-                "Unfortunately, you can't ride bicicle there.",
-                "You can't ride bicicle in {park}"
-            )
-        },
-        "skating"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-        "sports"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-        "playground"
-        {
-            true
-            '(
-                "There is a playground in {park}", 
-                "Kids can play in a playground in {park}"
-            )
-            false
-            '(
-                "Unfortunately, there is no playground in {park}"
-            )
-        }
-        "dogs"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-        "parking"
-        {
-            true
-            '(
-                ""
-            )
-            false
-            '(
-                ""
-            )
-        }
-    }
-)
-
-(
-    ;; TODO Receive the list of parks from park.clj
-    ;; TODO Approximate the match between input and the keyword
-    ;; e.g. bertrmk => bertramka; klinskeho zahrada => kinskeho-zahrada
-    def subjects
-    #{
-        "bertramka",
-        "frantiskanska-zahrada",
-        "obora-hvezda",
-        "kampa",
-        "kinskeho-zahrada",
-        "klamovka",
-        "ladronka",
-        "letna",
-        "petrin",
-        "riegrovy-sady",
-        "stromovka",
-        "vysehrad"
-    }
-)
+;; TODO Receive the list of parks from park.clj
+;; TODO Approximate the match between input and the keyword
+;; e.g. bertrmk => bertramka; klinskeho zahrada => kinskeho-zahrada
 
 (
         defn get-park-titles-set
@@ -171,7 +46,7 @@
             #(not (nil? %))
             (
                 map
-                    #(get keywords %)
+                    #(get data/keywords %)
                     (clojure.string/split input #" ")
             )
         )
@@ -229,7 +104,7 @@
             get
             (
                 get
-                    responses
+                    data/responses
                     keyword
             )
             (
