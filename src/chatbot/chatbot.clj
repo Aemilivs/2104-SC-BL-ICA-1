@@ -252,7 +252,9 @@
             filter
                 #(
                     contains?
-                        subjects
+                        (
+                         get-park-titles-set
+                         )
                         %
                 )
                 (clojure.string/split input #" ")
