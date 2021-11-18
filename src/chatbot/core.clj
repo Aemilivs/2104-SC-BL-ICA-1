@@ -16,7 +16,7 @@
               (not= input 'exit)
               (
                 do
-               (Thread/sleep (rand-int 5000))
+               (Thread/sleep (rand-int 1250))
                   (
                     println (chatbot/process input)
                   )
