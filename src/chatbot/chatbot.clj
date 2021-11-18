@@ -1,7 +1,7 @@
 (ns chatbot.chatbot
         (:require clojure.string)
         (:require [chatbot.park :as park])
-  (:require [chatbot.responses-&-keywords :as rk]))
+  (:require [chatbot.responses-and-keywords :as data]))
 
 ;; TODO move responses and keywords to a separated file.
 ;; TODO Receive the list of parks from park.clj
@@ -37,7 +37,7 @@
             #(not (nil? %))
             (
                 map
-                    #(get rk/keywords %)
+                    #(get data/keywords %)
                     (clojure.string/split input #" ")
             )
         )
@@ -95,7 +95,7 @@
             get
             (
                 get
-                    rk/responses
+                    data/responses
                     keyword
             )
             (
@@ -118,7 +118,7 @@
             filter
                 #(
                     contains?
-                        rk/subjects
+                        data/subjects
                         %
                 )
                 (clojure.string/split input #" ")
