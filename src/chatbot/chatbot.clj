@@ -117,23 +117,109 @@
 )
 
 (
+    defn measure-match
+    "Find the conditional value representing the match between two words."
+    (
+        ;; TODO: Add type constraint
+        [left right]
+        (
+            measure-match 
+                (clojure.string/split left #"") 
+                (clojure.string/split right #"") 
+                0
+        )
+    )
+    (
+        [left right weight]
+        (
+            if (or (empty? left) (empty? right))
+                weight
+                (
+                    if (= (first left) (first right))
+                        (measure-match (rest left) (rest right) (+ weight 1))
+                        (measure-match left (rest right) weight)
+                )
+        )
+    )
+)
+
+(
+    def match-value
+    (
+        create-struct
+            :word
+            :value
+    )
+)
+
+(
+    defn match-word-against-collection
+    "Find the most matching word in the collection"
+    [collection input]
+    (
+        reduce 
+            #(
+                if
+                    (
+                        > 
+                            (:value %1) 
+                            (:value %2)
+                    ) 
+                    %1 
+                    %2
+            )
+            (
+                map
+                    #(
+                        struct 
+                            match-value 
+                            %
+                            (
+                                measure-match
+                                    input
+                                    %
+                            )
+                    )
+                    collection
+            )
+    )
+)
+
+(
+    defn match-collection-against-collection
+    "Find the most matching word among two collections"
+    [left right]
+    (
+        :word
+        (
+            reduce 
+                #(
+                    if
+                        (
+                            > 
+                                (:value %1) 
+                                (:value %2)
+                        ) 
+                        %1 
+                        %2
+                )
+                (
+                    map
+                        #(match-word-against-collection right %)
+                        left
+                )
+        )
+    )
+)
+
+(
     defn match-subject
     "Find the subject in the input."
     [input]
     (
-        ;; TODO Introduce a handling of multiple subject matches.
-        first
-        (
-            filter
-                #(
-                    contains?
-                        (
-                         get-park-titles-set
-                         )
-                        %
-                )
-                (clojure.string/split input #" ")
-        )
+        match-collection-against-collection 
+            (clojure.string/split input #" ")
+            (get-park-titles-set)
     )
 )
 
