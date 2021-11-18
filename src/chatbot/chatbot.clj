@@ -134,6 +134,15 @@
 )
 
 (
+        defn get-park-titles-set
+        "Get park titles set"
+        []
+        (
+            set (keys (park/read-data))
+        )
+)
+
+(
     defn prepare-text
     "Prepare text for processing by removing all the punctuation signs and making it lower case."
     [input]
@@ -243,7 +252,9 @@
             filter
                 #(
                     contains?
-                        subjects
+                        (
+                         get-park-titles-set
+                         )
                         %
                 )
                 (clojure.string/split input #" ")
