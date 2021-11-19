@@ -42,7 +42,7 @@ The following features present a minimal viable product defined by the assignmen
 - The application must be able to provide basic information about Prague parks upon request. For the first task, we are supposed to provide only textual information about a park (e.g. all the textual information for Bertramka)
 
 Example output:
-
+```
 (chatbot)
 > Hello! Who are you?
 Petr
@@ -55,7 +55,7 @@ Can I ride a bike there?
 > Do you want to finish this dialogue?
 Yes.
 > Ok, bye!
-
+```
 ### Implementation
 
 
