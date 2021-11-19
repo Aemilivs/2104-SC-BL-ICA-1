@@ -1,6 +1,6 @@
 # Prague Park Guide Chatbot
 
-This report presents one of the deliverables for the first part of the semestral project (ICA-1) in Symbolic Computation module. The purpose of ICA-1 is to present a basic working solution of the project proposal, which will be expanded on and finalized in the second part of the semestral project (ICA-2). The assignment was completed in a team of 4 students.
+This technical report presents one of the deliverables for the first part of the semestral project (ICA-1) in Symbolic Computation module. The purpose of ICA-1 is to present a basic working solution of the project proposal, which will be expanded on and finalized in the second part of the semestral project (ICA-2). The assignment was completed in a team of 4 students.
 
 ## Executive Summary
 
