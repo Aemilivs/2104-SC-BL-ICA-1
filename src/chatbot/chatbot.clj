@@ -112,7 +112,6 @@
     defn measure-match
     "Find the conditional value representing the match between two words."
     (
-        ;; TODO: Add type constraint
         [left right]
         (
             measure-match 
