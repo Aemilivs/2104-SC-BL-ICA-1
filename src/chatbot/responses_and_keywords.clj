@@ -3,10 +3,10 @@
 (
     def keywords
     {
-        "bicicle" "bicicle",
-        "bike" "bicicle",
-        "ride" "bicicle",
-        "two-wheels" "bicicle",
+        "bicycle" "bicycle",
+        "bike" "bicycle",
+        "ride" "bicycle",
+        "two-wheels" "bicycle",
         "playground" "playground",
         "kids" "playground",
         "wc" "wc",
@@ -85,14 +85,14 @@
         {
             true 
             '(
-                "You can ride bicicle in {park}",
-                "There is a bicicle road in {park}",
+                "You can ride bicycle in {park}",
+                "There is a bicycle road in {park}",
                 "{park} has the roads, you will be on two wheels"
             )
             false
             '(
-                "Unfortunately, you can't ride bicicle in {park}.",
-                "You can't ride bicicle in {park}"
+                "Unfortunately, you can't ride bicycle in {park}.",
+                "You can't ride bicycle in {park}"
             )
         },
         "skating"
@@ -138,8 +138,8 @@
         {
             true
             '(
-                "Of course you can visit {park} with you good boy or girl",
-                "You are welcome in {park} wtih your pet"
+                "Of course you can visit {park} with your good boy or girl",
+                "You are welcome in {park} with your pet"
             )
             false
             '(

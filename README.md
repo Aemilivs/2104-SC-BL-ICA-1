@@ -1,45 +1,44 @@
-# chatbot
+# Chatbot
 
 ICA-1 of 2104 - Symbolic Computation - Blended Learning
+The purpose of this chatbot is to provide information about parks in Prague.
 
+## Technologies
+
+- [Clojure](https://clojure.org)
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Run this command in your terminal to download the project:
+```sh
+git clone https://github.com/Aemilivs/2104-SC-BL-ICA-1
+```
 
 ## Usage
 
-FIXME: explanation
+To run the chatbot, please navigate to the project folder with terminal and run:
+```sh
+lein run
+```
 
-    $ java -jar chatbot-0.1.0-standalone.jar [args]
+## Contributing 
 
-## Options
+1. Fork your own copy of the project to your account
+2. Create a new branch for your feature
+3. Commit the changes
+4. Push your changes to your fork
+5. Open a pull request
 
-FIXME: listing of options this app accepts.
+## Bugs
 
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+No known bugs.
 
 ## License
+GNU General Public License v3.0. See `LICENSE` for more information. 
 
-Copyright © 2021 FIXME
+## Contributors
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+- [Jan Šaradin](https://github.com/h0nz1n)
+- [Nikolai Skrabets](https://github.com/skrabets)
+- [Vadim Emelin](https://github.com/Aemilivs)
+- [Anastasiia Honcharuk](https://github.com/anastasiia724)
