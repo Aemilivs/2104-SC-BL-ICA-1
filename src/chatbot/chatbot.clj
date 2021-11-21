@@ -267,18 +267,20 @@
         ]
         (
             ;; TODO: Introduce a guard clause to handle exit sequence (e.g. Goodbye!)
-            ;; TODO: Introduce a guard clause to handle empty responses list
-            if (nil? subject)
-                "I am sorry, but I couldn't understand what park are you wondering about."
-                (
-                    replace-placeholders
-                        (
-                            build-response 
-                                keyword 
-                                subject
-                        )
-                        subject
-                )
+            if
+                (nil? keyword)
+                "Sorry, but I couldn't understand your question."
+                if (nil? subject)
+                    "I am sorry, but I couldn't understand what park are you wondering about."
+                    (
+                        replace-placeholders
+                            (
+                                build-response 
+                                    keyword 
+                                    subject
+                            )
+                            subject
+                    )
         )
     )
 )
