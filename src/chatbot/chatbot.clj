@@ -1,5 +1,6 @@
 (
-    ns chatbot.chatbot
+    ns 
+        chatbot.chatbot
         (:require clojure.string)
         (:require [chatbot.park :as park])
         (:require [chatbot.responses-and-keywords :as data])
@@ -256,6 +257,32 @@
 )
 
 (
+    defn is-exit-sequence
+    "Define whether the input is an exit sequence or not"
+    [input]
+    (
+        let
+        [
+            words
+            (
+                clojure.string/split 
+                    input 
+                    #" "
+            )
+        ]
+        (
+            if (> (count words) 1)
+                false
+                (
+                    contains?
+                        data/exit-words
+                        (first words)
+                )
+        )
+    )
+)
+
+(
     defn select-response
     "Select correct responses depending on the input"
     [input]
@@ -266,21 +293,29 @@
             subject (match-subject input)
         ]
         (
-            ;; TODO: Introduce a guard clause to handle exit sequence (e.g. Goodbye!)
-            if
-                (nil? keyword)
-                "Sorry, but I couldn't understand your question."
-                (if (nil? subject)
-                    "I am sorry, but I couldn't understand what park are you wondering about."
-                    (
-                        replace-placeholders
-                            (
-                                build-response 
-                                    keyword 
-                                    subject
-                            )
-                            subject
-                    ))
+            if (is-exit-sequence input)
+                (
+                    do
+                        (rand-nth data/farewells)
+                        (System/exit 0)
+                )
+                (
+                    if (nil? keyword)
+                        "Sorry, but I couldn't understand your question."
+                        (
+                            if (nil? subject)
+                                "I am sorry, but I couldn't understand what park are you wondering about."
+                                (
+                                    replace-placeholders
+                                        (
+                                            build-response 
+                                                keyword 
+                                                subject
+                                        )
+                                        subject
+                                )
+                        )
+                )
         )
     )
 )

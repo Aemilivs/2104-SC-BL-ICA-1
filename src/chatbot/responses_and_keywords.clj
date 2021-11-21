@@ -25,6 +25,33 @@
 )
 
 (
+    def greetings
+    '(
+        "Hello! Please, state your question regarding parks of Prague. To exit, please write \"Bye!\"",
+        "Hi! Feel free to ask me about parks of Prague. To end the chat, please type \"exit\".",
+        "Welcome! I am glad to answer any question regarding parks of Prague. To quit, please type \"quit\""
+    )
+)
+
+(
+    def farewells
+    '(
+        "Thank you and goodbye!",
+        "Bye!",
+        "Farewell!"
+    )
+)
+
+(
+    def exit-words
+    #{
+        "bye",
+        "exit",
+        "quit"
+    }
+)
+
+(
     def responses
     {
         "wc"
