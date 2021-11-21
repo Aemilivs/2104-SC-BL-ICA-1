@@ -56,20 +56,43 @@ Can I ride a bike there?
 Yes.
 > Ok, bye!
 ```
+
 ### Implementation
 
+We have started the first project phase by defining the core functionalitites, which can be developed separately by individual team members. The following core functionalities were identified:
 
+- User interactive prompt
+- Input data reader and parser
+- Response dictionary
+- Response handler
+
+The development started with programming a basic prompt functionality communicating with the user and expecting an action which exits the program. Once this basic interaction was confirmed, the code for reading the provided JSON file containing the attributes of a selection of Prague parks has been implemented. Basic parsing functionality has been included in the JSON reader, striping the input data of punctuation and lower-casing all keywords.
+
+Next step in development was creating a dictionary of the chatbot responses based on keywords provided by the user input. Multiple possible responses per keyword were implemented both for positive and negative chatbot reactions. With the dictionary in place, response handler functionality was finally developed. Overall sequence of the operations performed by the current state of the program is as follows:
+
+- Running the command line interface expecting and reading input from user
+- Reading and parsing the park data provided in the form of a JSON file
+- Identifying a keyword in the input provided by the user
+- Comparing the identified keyword with the data received by the JSON file and attempting to find a match
+- Hooking relevant responses to the identified keyword
+- Building the response and outputing it in the command line interface to the user
 
 ### Testing
 
 The resulting application testing was performed both manually in Leiningen REPL environment and by using Leiningen `test` functionality for running test files.
 
-The tests confirmed the MVP functionality of our chatbot application:
-![Image](src)
+The result of manual test run:
+
+![Image](img/test_run3.png)
+
+
+The result of running one of the test files:
+
+![Image](img/test_run2.png)
 
 ## Conclusions
 
-The assignment provided a great opportuninity to refamiliarize ourselves with functional programming paradigm and basic applicaton of symbolic computation patterns. A clear outline for developing a simple form of artificial inteligence using these concepts has been layed out. We are looking forward on implementing additional functionalities and expanding the abilities of our currently very primitive park recommending chatbot application.
+The assignment provided a great opportuninity to refamiliarize ourselves with functional programming paradigm and basic applicaton of symbolic computation patterns. A clear outline for developing a simple form of artificial inteligence using these concepts has been layed out. We believe we are prepared on implementing additional functionalities and expanding the abilities of our currently very primitive park recommending chatbot application in the second part of the project.
 
 ## References
 
