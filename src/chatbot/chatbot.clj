@@ -270,7 +270,7 @@
             if
                 (nil? keyword)
                 "Sorry, but I couldn't understand your question."
-                if (nil? subject)
+                (if (nil? subject)
                     "I am sorry, but I couldn't understand what park are you wondering about."
                     (
                         replace-placeholders
@@ -280,7 +280,7 @@
                                     subject
                             )
                             subject
-                    )
+                    ))
         )
     )
 )
