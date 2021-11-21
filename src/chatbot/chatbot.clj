@@ -1,20 +1,8 @@
-(ns chatbot.chatbot
+(
+    ns chatbot.chatbot
         (:require clojure.string)
         (:require [chatbot.park :as park])
-  (:require [chatbot.responses-and-keywords :as data]))
-
-;; TODO move responses and keywords to a separated file.
-;; TODO Receive the list of parks from park.clj
-;; TODO Approximate the match between input and the keyword
-;; e.g. bertrmk => bertramka; klinskeho zahrada => kinskeho-zahrada
-
-(
-        defn get-park-titles-set
-        "Get park titles set"
-        []
-        (
-            set (keys (park/read-data))
-        )
+        (:require [chatbot.responses-and-keywords :as data])
 )
 
 (
@@ -39,7 +27,6 @@
     "Find the keyword in the input to hook the responses to it"
     [input]
     (
-        ;; TODO Handle multiple keywords?
         first
         (
             filter
@@ -107,10 +94,14 @@
                     data/responses
                     keyword
             )
+            ;; WIP change it to be able to process both string and boolean
             (
-                get-keyword-data
-                keyword
-                subject
+                boolean
+                (
+                    get-keyword-data
+                        keyword
+                        subject
+                )
             )
         )
     )
@@ -136,8 +127,18 @@
                 weight
                 (
                     if (= (first left) (first right))
-                        (measure-match (rest left) (rest right) (+ weight 1))
-                        (measure-match left (rest right) weight)
+                        (
+                            measure-match 
+                                (rest left) 
+                                (rest right) 
+                                (+ weight 1)
+                        )
+                        (
+                            measure-match 
+                                left 
+                                (rest right) 
+                                weight
+                        )
                 )
         )
     )
@@ -226,8 +227,12 @@
     [input]
     (
         match-collection-against-collection 
-            (clojure.string/split input #" ")
-            (get-park-titles-set)
+            (
+                clojure.string/split 
+                    input 
+                    #" "
+            )
+            (park/get-park-titles)
     )
 )
 
@@ -236,10 +241,17 @@
     "Replace the placeholders with actual values"
     [response subject]
     (
-        clojure.string/replace 
-            response 
-            #"\{park\}" 
-            (clojure.string/capitalize subject)
+        -> response
+            (
+                clojure.string/replace 
+                    #"\{park\}" 
+                    (clojure.string/capitalize subject)
+            )
+            (
+                clojure.string/replace 
+                    #"\{attractions\}" 
+                    (chatbot.park/get-attractions subject)
+            )
     )
 )
 
@@ -278,7 +290,8 @@
     (
         select-response
         (
-            prepare-text input
+            prepare-text 
+                input
         )
     )
 )
