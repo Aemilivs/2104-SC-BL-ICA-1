@@ -8,18 +8,19 @@
         "ride" "bicicle",
         "two-wheels" "bicicle",
         "playground" "playground",
-     "kids" "playground",
-     "wc" "wc",
-     "public bathrooms" "wc",
-     "attractions" "attractions",
-     "skating" "skating",
-     "sports" "sports",
-     "activities" "sports",
-     "fitness" "sports",
-     "parking" "parking",
-     "vehicle" "parking",
-     "dogs" "dogs",
-     "pets" "dogs"
+        "kids" "playground",
+        "wc" "wc",
+        "public bathrooms" "wc",
+        "attractions" "attractions",
+        "sightseeings" "attractions",
+        "skating" "skating",
+        "sports" "sports",
+        "activities" "sports",
+        "fitness" "sports",
+        "parking" "parking",
+        "vehicle" "parking",
+        "dogs" "dogs",
+        "pets" "dogs"
     }
 )
 
@@ -31,26 +32,26 @@
             true
             '(
                 "Yes, there are public bathrooms in {park}",
-              "Yes!",
-              "Sure!"
+                "Yes! There is a toilet in {park}",
+                "Sure! You can find a wc in{park}"
             )
             false
             '(
                 "Unfortunatly no wc in {park}",
-              "We appologize, {park}'s wc is closed for reconstruction"
+                "We appologize, {park}'s wc is closed for reconstruction"
             )
         }
         "attractions"
         {
             true
             '(
-                "Yes, in {park} you can find cultural and social events, leasure areas, cafes and restaurants",
-              "Yes, a lot!"
+                "Yes, in {park} you can find: {attractions}",
+                "Yes, a lot! There are the following attractions: {attractions}"
             )
             false
             '(
                 "No, there are no any attractions in {park}",
-              "Unfortunatly, main attraction is on reconstruction"
+                "Unfortunatly, main attraction is on reconstruction"
             )
         }
         "bicicle"
@@ -63,7 +64,7 @@
             )
             false
             '(
-                "Unfortunately, you can't ride bicicle there.",
+                "Unfortunately, you can't ride bicicle in {park}.",
                 "You can't ride bicicle in {park}"
             )
         },
@@ -71,13 +72,13 @@
         {
             true
             '(
-                "Yes, there is free skatepark here",
-              "You can found publick outdoor skatepark here"
+                "Yes, there is free skatepark in {park}",
+                "You can found publick outdoor skatepark in {park}"
             )
             false
             '(
-                "No, there is no skating park here",
-              "No"
+                "No, there is no skating park in {park}",
+                "No, skating is not allowed in {park}"
             )
         }
         "sports"
@@ -85,12 +86,12 @@
             true
             '(
                 "Different kind of outdoor sports and activities can be found in {park}",
-              "Public fitness ground is located in {park}"
+                "Public fitness ground is located in {park}"
             )
             false
             '(
-                "No dedicated sport grounds here",
-              "No sport grounds, but you can run around the {park}"
+                "No dedicated sport grounds in {park}",
+                "No sport grounds, but you can run around the {park}"
             )
         }
         "playground"
@@ -103,34 +104,34 @@
             false
             '(
                 "Unfortunately, there is no playground in {park}",
-              "We appologize, playground is on reconstruction"
+                "We appologize, but playground in {park} is on reconstruction"
             )
         }
         "dogs"
         {
             true
             '(
-                "Of course you can visit {pak} with you good boy or girl",
-              "You are welcome in {park} wtih your pet"
+                "Of course you can visit {park} with you good boy or girl",
+                "You are welcome in {park} wtih your pet"
             )
             false
             '(
-                "We appologize, but you can't walk the dog here",
-              "Dogs are not allowed"
+                "We appologize, but you can't walk the dog in {park}",
+                "Dogs are not allowed in {park}"
             )
         }
         "parking"
         {
             true
             '(
-                "Big free parking nearby",
-              "Yes, parking is available near {park}",
-              "Sure, you can park you vehicle opposite to main entrance"
+                "Big free parking nearby {park}",
+                "Yes, parking is available near {park}",
+                "Sure, you can park you vehicle opposite to main entrance of {park}"
             )
             false
             '(
-                "No free parking here",
-              "Parking in the adjacent street, free on weekends"
+                "No free parking in {park}",
+                "Parking in the adjacent street, free on weekends"
             )
         }
     }

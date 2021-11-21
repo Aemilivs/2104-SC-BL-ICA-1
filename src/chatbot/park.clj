@@ -18,7 +18,10 @@
         "Get park titles"
         []
         (
-            keys (read-data)
+            set 
+            (
+                keys (read-data)
+            )
         )
     )
 
@@ -30,8 +33,12 @@
             property
         ]
         (
-            (get (read-data) title) 
-            property
+            (
+                get 
+                    (read-data) 
+                    title
+            ) 
+                property
         )
     )
 
@@ -53,7 +60,7 @@
         (
             get-park-property 
                 title
-                "biking" 
+                "attractions" 
         )
     )
 
@@ -86,7 +93,7 @@
         (
             get-park-property 
                 title
-                "skating" 
+                "sports" 
         )
     )
 
