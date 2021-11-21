@@ -13,7 +13,7 @@
           let [input (read-line)]
           (
             when
-              (not= input 'exit)
+              (not= input "exit")
               (
                 do
                (Thread/sleep (rand-int 1250))
