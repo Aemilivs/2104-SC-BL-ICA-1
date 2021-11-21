@@ -1,32 +1,36 @@
-(ns chatbot.core
-  (:gen-class)
-  (:require [chatbot.chatbot :as chatbot]))
+(
+  ns 
+    chatbot.core
+    (:gen-class)
+    (:require [chatbot.chatbot :as chatbot])
+    (:require [chatbot.responses-and-keywords :as data])
+)
   
+(
+  defn prompt
+  "Introduce CLI"
+  []
   (
-    defn prompt
-    "Introduce CLI"
-    []
-    (
-      do
-        (println "Hello, please type exit to finish the application.")
+    do
+      (
+        let [input (read-line)]
         (
-          let [input (read-line)]
-          (
-            when
-              (not= input "exit")
-              (
-                do
-               (Thread/sleep (rand-int 1250))
-                  (
-                    println (chatbot/process input)
-                  )
-                  (recur)
-              )
-          )
+          do
+            (
+              Thread/sleep (rand-int 1250)
+            )
+            (
+              println (chatbot/process input)
+            )
+            (recur)
         )
-    )
+      )
   )
+)
 
-  (defn -main
-    [& args]
-    (prompt))
+(
+  defn -main
+  [& args]
+  (println (rand-nth data/greetings))
+  (prompt)
+)
