@@ -191,24 +191,32 @@
     "Find the most matching word among two collections"
     [left right]
     (
-        :word
+        let
+        [
+            result
+            (
+                reduce 
+                    #(
+                        if
+                            (
+                                > 
+                                    (:value %1) 
+                                    (:value %2)
+                            ) 
+                            %1 
+                            %2
+                    )
+                    (
+                        map
+                            #(match-word-against-collection right %)
+                            left
+                    )
+            )
+        ]
         (
-            reduce 
-                #(
-                    if
-                        (
-                            > 
-                                (:value %1) 
-                                (:value %2)
-                        ) 
-                        %1 
-                        %2
-                )
-                (
-                    map
-                        #(match-word-against-collection right %)
-                        left
-                )
+            if (> (:value result) 3)
+                (:word result)
+                nil
         )
     )
 )
@@ -260,14 +268,17 @@
         (
             ;; TODO: Introduce a guard clause to handle exit sequence (e.g. Goodbye!)
             ;; TODO: Introduce a guard clause to handle empty responses list
-            ;; TODO: Introduce a guard clause to handle missing subject
-            replace-placeholders
+            if (nil? subject)
+                "I am sorry, but I couldn't understand what park are you wondering about."
                 (
-                    build-response 
-                        keyword 
+                    replace-placeholders
+                        (
+                            build-response 
+                                keyword 
+                                subject
+                        )
                         subject
                 )
-                subject
         )
     )
 )
